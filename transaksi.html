@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi Pembelian Kue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555555;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .fa {
+            margin-right: 8px;
+        }
+
+        .fa-wallet {
+            color: #007bff;
+        }
+
+        .fa-mobile-alt {
+            color: #00aaff;
+        }
+
+        .fa-credit-card {
+            color: #ff9900;
+        }
+
+        .fa-shopping-cart {
+            color: #ff5722;
+        }
+
+        .fa-money-bill {
+            color: #4caf50;
+        }
+
+        .total-price {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+    <script>
+        function calculateTotal() {
+            const cakePrices = {
+                "chocolate_croissant": 30000,
+                "matcha_cakes": 350000,
+                "donut_caramel": 25000,
+                "cromboloni": 45000,
+                "buttery_croissant": 39999,
+                "strawberry_cheesecake": 60000,
+                "mini_cakes": 77777,
+                "choco_birthday": 599999,
+                "donut_wonders": 28000
+            };
+
+            const selectedCake = document.getElementById('cake').value;
+            const quantity = document.getElementById('quantity').value;
+            const price = cakePrices[selectedCake] || 0;
+            const total = price * quantity;
+
+            document.getElementById('totalPrice').innerText = `Total Harga: Rp ${total.toLocaleString('id-ID')}`;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>GEN Z BAKERY</h1>
+        <form oninput="calculateTotal()">
+            <div class="form-group">
+                <label for="name">Nama Pembeli</label>
+                <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Nomor HP</label>
+                <input type="tel" id="phone" name="phone" placeholder="Masukkan nomor HP Anda" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cake">Pilih Nama Kue</label>
+                <select id="cake" name="cake" required>
+                    <option value="">-- Pilih Kue --</option>
+                    <option value="chocolate_croissant">Chocolate Croissant - Rp 30.000</option>
+                    <option value="matcha_cakes">Matcha Cakes - Rp 350.000</option>
+                    <option value="donut_caramel">Donut Caramel - Rp 25.000</option>
+                    <option value="cromboloni">Cromboloni - Rp 45.000</option>
+                    <option value="buttery_croissant">Buttery Croissant - Rp 39.999</option>
+                    <option value="strawberry_cheesecake">Strawberry Cheese Cake - Rp 60.000</option>
+                    <option value="mini_cakes">Mini Cakes - Rp 77.777</option>
+                    <option value="choco_birthday">Choco Birthday - Rp 599.999</option>
+                    <option value="donut_wonders">Donut Wonders - Rp 28.000</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Jumlah Kue</label>
+                <input type="number" id="quantity" name="quantity" placeholder="Masukkan jumlah kue" required min="1">
+            </div>
+
+            <div class="form-group">
+                <label>Metode Pembayaran</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="payment" value="dana" required> <i class="fa fa-wallet"></i> DANA</label>
+                    <label><input type="radio" name="payment" value="ovo"> <i class="fa fa-mobile-alt"></i> OVO</label>
+                    <label><input type="radio" name="payment" value="gopay"> <i class="fa fa-credit-card"></i> GoPay</label>
+                    <label><input type="radio" name="payment" value="shopeepay"> <i class="fa fa-shopping-cart"></i> ShopeePay</label>
+                    <label><input type="radio" name="payment" value="linkaja"> <i class="fa fa-money-bill"></i> LinkAja</label>
+                </div>
+            </div>
+
+            <div id="totalPrice" class="total-price">Total Harga: Rp 0</div>
+            <button type="submit">Pesan Sekarang</button>
+        </form>
+    </div>
+</body>
+
+</html>
